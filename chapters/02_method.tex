@@ -1,0 +1,31 @@
+\chapter{模板设计与实现}
+
+\section{总体结构}
+项目采用与参考项目相近的“入口文件—章节文件—样式文件—构建脚本”结构，但文档类按照江苏大学模板独立实现。入口文件只负责元数据、文献数据库和章节顺序；格式细节集中在 \texttt{style/ujsthesis.cls} 中。
+
+\begin{table}[H]
+  \centering
+  \caption{项目文件与职责}
+  \begin{tabular}{p{0.30\linewidth}p{0.56\linewidth}}
+    \toprule
+    文件或目录 & 职责 \\
+    \midrule
+    \texttt{main.tex} & 配置元数据并组织编译顺序 \\
+    \texttt{style/ujsthesis.cls} & 实现字体、尺寸、页眉页码和标题层级 \\
+    \texttt{chapters/} & 保存可独立维护的论文内容 \\
+    \texttt{bib/references.bib} & 使用 GB/T 7714-2015 的参考文献数据 \\
+    \texttt{Makefile}、\texttt{latexmkrc} & 提供可复现的本地构建入口 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{字体与页面设置}
+正文使用小四号中文字体和 1.5 倍近似行距，英文和数字使用 TeX Gyre Termes 作为 Times New Roman 的跨平台替代。页面使用 A4 纸，页边距根据所附 2026 版 Word 模板转换结果设置；如学院另发细则，应优先以学院细则为准并在类文件中调整。
+
+\section{图表和公式接口}
+图表、公式和代码应在正文中被引用。公式示例为
+\begin{equation}
+  y = f(x;\theta) + \varepsilon,
+  \label{eq:model}
+\end{equation}
+其中 $\theta$ 是待估参数，$\varepsilon$ 表示未建模误差。式~\eqref{eq:model} 只示范交叉引用，不代替具体课题的模型假设。

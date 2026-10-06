@@ -1,0 +1,48 @@
+\documentclass[
+  oneside,
+  fontset=fandol
+]{ujsthesis}
+
+% Bibliography is GB/T 7714-2015 numeric and follows citation order.
+\addbibresource{bib/references.bib}
+
+\ujstitle{面向本科毕业设计的可复现论文模板设计}
+\ujstitleen{Design of a Reproducible Thesis Template for Undergraduate Projects}
+\ujscollege{计算机科学与通信工程学院}
+\ujsmajor{计算机科学与技术 2201 班}
+\ujsstudent{张三}
+\ujsstudentid{2020123456}
+\ujsadvisor{李四}
+\ujsrank{副教授}
+\ujsdate{2026 年 6 月}
+\ujsdeclarationdate{2026 年 6 月\quad 日}
+\ujskeywords{本科毕业设计；LaTeX；格式规范；可复现构建}
+\ujskeywordsEN{undergraduate thesis; LaTeX; formatting specification; reproducible build}
+\ujsabstract{本文围绕江苏大学本科毕业设计（论文）通用格式的 LaTeX 实现问题，设计并实现一个适用于理工农医教类专业的可配置、可复现论文模板。研究首先将学校 2026 版 Word 模板中的封面、原创性声明、摘要、目录、正文、参考文献、附录和致谢等内容拆分为可维护的源文件模块，再把 A4 页面、页边距、中文和英文字体、字号、段落缩进、行距、标题层级、页眉和页码等要求集中到文档类中管理。模板采用 XeLaTeX 编译中文内容，使用随 TeX Live 提供的 Fandol 字体保证跨平台构建，并以 TeX Gyre Termes 作为英文和数字字体的可复现替代。项目同时提供图表、公式、代码、标签、交叉引用和 GB/T 7714-2015 数字型参考文献的基础接口，使论文作者能够在保持结构清晰的情况下逐步补充自己的研究内容。示例工程按照封面、前置页、正文、参考文献、致谢和附录的顺序组织，配合 latexmk、Biber 和 Makefile 完成自动重复编译。构建验证检查了 PDF 是否生成、页数和纸张规格、页眉文字、罗马数字前置页码、阿拉伯数字正文页码、目录编号、参考文献输出以及关键中文字符是否正常嵌入。结果表明，该模板能够在当前 TeX Live 环境中稳定生成结构完整的本科论文样例，并为后续替换题目、作者信息、章节内容、实验数据和图表提供统一的排版入口。}
+\ujsabstractEN{This project develops a configurable and reproducible LaTeX template for undergraduate design reports and theses in science, engineering, agriculture, medicine, and education at Jiangsu University. The work begins by translating the 2026 Word template into maintainable source modules for the cover, originality statement, Chinese abstract, English abstract, table of contents, main chapters, references, acknowledgements, and appendix. Page geometry, CJK and Latin fonts, font sizes, paragraph indentation, line spacing, heading levels, headers, and page numbering are centralized in one document class so that content files do not need to repeat formatting instructions. XeLaTeX is used for Chinese typesetting, Fandol fonts supplied by TeX Live provide a portable CJK environment, and TeX Gyre Termes provides a reproducible Latin font substitute for Times New Roman. The project also exposes basic interfaces for figures, tables, equations, source code, labels, cross references, and numeric references formatted according to GB/T 7714-2015. The source tree follows a stable writing order: metadata and bibliography are configured in the root file, chapters are maintained independently, and the class controls the visual rules shared by all pages. A latexmk configuration, a Makefile, and a GitHub Actions workflow provide repeatable local and continuous integration builds. The example build checks PDF generation, A4 page geometry, required header text, Roman numbering in the front matter, Arabic numbering from the introduction through the appendix, Arabic chapter numbers in the contents, bibliography generation by Biber, and embedding of the selected Chinese and Latin fonts. It also keeps the layout logic separate from the prose so that a change to a title or a paragraph does not require manual editing of page headers or table of contents entries. The modular design makes it possible to add a discipline-specific chapter, insert a measured experiment, or replace the bibliography database without changing the document class. The resulting sample demonstrates a complete compilation path from editable source to PDF. It is intended as a practical starting point: authors still need to replace the placeholder metadata and example prose, add their own figures and measurements, verify the latest college-level requirements, and inspect the final PDF on the target printer before submission.}
+
+\begin{document}
+
+\MakeCover
+\UJSFrontMatter
+\MakeDeclaration
+
+\MakeAbstract
+\MakeTOC
+
+\UJSMainMatter
+\include{chapters/01_introduction}
+\include{chapters/02_method}
+\include{chapters/03_results}
+\include{chapters/04_conclusion}
+
+\UJSReferences
+
+\UJSBackMatterHeading{致谢}
+\input{chapters/acknowledgements}
+
+\UJSBackMatterHeading{附录}
+\appendix
+\include{chapters/appendix}
+
+\end{document}
